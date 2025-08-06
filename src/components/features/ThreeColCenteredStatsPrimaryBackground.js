@@ -5,63 +5,41 @@ import {
   SectionHeading,
   Subheading as SubheadingBase,
 } from "components/misc/Headings.js";
-import {
-  Container as ContainerBase,
-  ContentWithPaddingXl,
-} from "components/misc/Layouts";
 import { SectionDescription } from "components/misc/Typography";
 
-const Container = tw(
-  ContainerBase
-)`my-8 lg:my-10 bg-blue-900 text-gray-100 -mx-8 px-8`;
-const HeadingContainer = tw.div``;
+// ✅ NO absolute, NO flex-grow, NO overlap
+const Container = tw.div`w-full bg-blue-900 text-gray-100 px-4 flex flex-col flex-grow min-h-0`;
+const Content = tw.div`max-w-screen-xl w-full mx-auto flex-grow flex flex-col justify-center items-center py-24 md:py-32`;
+const HeadingContainer = tw.div`text-center`;
 const Heading = tw(SectionHeading)`sm:text-3xl md:text-4xl lg:text-5xl`;
-const Subheading = tw(SubheadingBase)`text-gray-100 text-center`;
+const Subheading = tw(SubheadingBase)`text-gray-100`;
 const Description = tw(
   SectionDescription
-)`text-gray-400 text-center mx-auto max-w-screen-md`;
+)`text-gray-400 max-w-screen-md mx-auto`;
 
-const StatsContainer = tw.div`mt-8 flex flex-col sm:flex-row items-center justify-center flex-wrap max-w-screen-md justify-between mx-auto`;
-const Stat = tw.div`flex flex-col text-center p-4 tracking-wide`;
-const StatKey = tw.div`text-xl font-medium`;
-const StatValue = tw.div`text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-black`;
+const AdditionalText = tw.div`mt-12 text-center text-xl text-gray-300 max-w-screen-md`;
 
 export default ({
   subheading = "",
-  heading = "Apoyo 100% Latino",
-  description = "“Nos dedicamos a conectar a nuestra comunidad con seguros accesibles, sin presiones ni enredos.",
-  stats = [
-    {
-      key: "Familias",
-      value: "+2500",
-    },
-    {
-      key: "Ahorros",
-      value: "$+100M",
-    },
-    {
-      key: "Opciones",
-      value: "+30",
-    },
-  ],
+  heading = "Site Under Maintenance",
+  description = "We're making improvements to serve you better.",
+  additionalText = (
+    <>
+      Our team is currently performing scheduled updates. <br />
+      We’ll be back shortly — thank you for your patience and trust.
+    </>
+  ),
 }) => {
   return (
     <Container>
-      <ContentWithPaddingXl>
+      <Content>
         <HeadingContainer>
           {subheading && <Subheading>{subheading}</Subheading>}
           <Heading>{heading}</Heading>
-          {description && <Description>{description}</Description>}
+          <Description>{description}</Description>
         </HeadingContainer>
-        <StatsContainer>
-          {stats.map((stat, index) => (
-            <Stat key={index}>
-              <StatValue>{stat.value}</StatValue>
-              <StatKey>{stat.key}</StatKey>
-            </Stat>
-          ))}
-        </StatsContainer>
-      </ContentWithPaddingXl>
+        <AdditionalText>{additionalText}</AdditionalText>
+      </Content>
     </Container>
   );
 };

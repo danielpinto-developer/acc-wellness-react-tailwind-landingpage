@@ -4,9 +4,10 @@ import { globalStyles } from "twin.macro";
 const GlobalStyles = createGlobalStyle(
   globalStyles,
   `
-    html, body {
+    html, body, #root {
       margin: 0;
       padding: 0;
+      height: 100%;
       width: 100%;
       overflow-x: hidden;
       font-family: 'Inter', sans-serif;
@@ -17,8 +18,15 @@ const GlobalStyles = createGlobalStyle(
     }
 
     #root {
-      width: 100%;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .ReactModal__Overlay {

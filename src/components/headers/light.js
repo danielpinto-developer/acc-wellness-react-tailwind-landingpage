@@ -1,35 +1,39 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import logo from "../../images/logo.svg";
+import logo from "images/logo.svg";
+import logo2 from "images/logo2.svg";
 
-// Matches footer structure: no weird gaps or margins
-const Container = tw.div`relative bg-gray-200 text-gray-700 px-4 py-4`;
-const Inner = tw.div`max-w-screen-xl mx-auto flex justify-between items-center`;
+// ✅ This is your banner with fixed height + full width background
+const Container = styled.div`
+  ${tw`relative w-full overflow-hidden`}
+  height: 200px;
+`;
 
-const Logo = styled.img`
-  width: 10rem; /* default mobile size */
+// ✅ Full-width background
+const BannerImage = styled.img`
+  ${tw`w-full h-full`}
+  object-fit: cover;
+  display: block;
+`;
+
+// ✅ Centered logo on top
+const CenteredLogo = styled.img`
+  ${tw`absolute left-1/2 top-1/2`}
+  transform: translate(-50%, -50%);
+  width: 25rem;
   height: auto;
 
   @media (min-width: 640px) {
-    width: 13rem; /* match your desktop size */
+    width: 30rem;
   }
 `;
 
-const InfoBlock = tw.div`text-right leading-tight`;
-const PhoneHeading = tw.div`text-sm sm:text-base font-semibold text-gray-800`;
-const PhoneNumber = tw.a`block text-base sm:text-lg text-primary-500 font-bold hover:underline mt-1`;
-
-export default function SimpleHeader() {
+export default function Light() {
   return (
     <Container>
-      <Inner>
-        <Logo src={logo} alt="Confianza Total Logo" />
-        <InfoBlock>
-          <PhoneHeading>El Seguro Que Mereces</PhoneHeading>
-          <PhoneNumber href="tel:18885888415">1-888-588-8415</PhoneNumber>
-        </InfoBlock>
-      </Inner>
+      <BannerImage src={logo2} alt="ACC Wellness Banner" />
+      <CenteredLogo src={logo} alt="ACC Wellness Logo" />
     </Container>
   );
 }
